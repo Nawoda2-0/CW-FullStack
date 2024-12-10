@@ -43,6 +43,7 @@ public class ThreadManager {
 
         System.out.println("======REAL TIME TICKETING SYSTEM=====");
         System.out.println('\n');
+
         ticketPool = new TicketPool(config);
 
         for (int i=0; i< numOfVendor;i++){

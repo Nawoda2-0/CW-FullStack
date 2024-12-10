@@ -1,7 +1,7 @@
 package com.example.OOP_CW_w2051783.model;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,10 +11,9 @@ import java.util.List;
 @Component
 public class TicketPool {
 
+
     @Autowired
     private TicketConfig config;
-
-
 
     private final int totalCapacity ;
 
@@ -22,7 +21,6 @@ public class TicketPool {
     public List<String> totalTicketArray = Collections.synchronizedList(new ArrayList<>());
 
     //Constructor for the TicketPool class
-    @Autowired
     public TicketPool(TicketConfig config) {
         this.config = config;
         this.totalCapacity = config.getTotalTickets();
@@ -75,7 +73,11 @@ public class TicketPool {
                     '\n' + "   Total ticket available for sell : " + totalTicketArray.size());
         System.out.println();
 
+
         notifyAll();
     }
+
+
+
 
 }
