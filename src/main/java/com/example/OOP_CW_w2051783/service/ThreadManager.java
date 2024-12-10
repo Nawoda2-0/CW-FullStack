@@ -31,6 +31,9 @@ public class ThreadManager {
         TicketConfig config = configHolder.getCurrentConfig();
         System.out.println("Configuration Received" + config);
 
+        // Set the configuration in the TicketPool
+        ticketPool.setConfig(config);
+
         //setting the input values for use in threads
         int numOfVendor = config.getNumOfVendor();
         int numOfCustomers = config.getNumOfCustomer();
@@ -44,7 +47,7 @@ public class ThreadManager {
         System.out.println("======REAL TIME TICKETING SYSTEM=====");
         System.out.println('\n');
 
-        ticketPool = new TicketPool(config);
+
 
         for (int i=0; i< numOfVendor;i++){
             Thread vendor = new Vendor(ticketPool, config);

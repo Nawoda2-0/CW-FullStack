@@ -1,5 +1,6 @@
 package com.example.OOP_CW_w2051783.model;
 
+import com.example.OOP_CW_w2051783.configuration.TicketWebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
@@ -11,26 +12,41 @@ import java.util.List;
 @Component
 public class TicketPool {
 
-
-    @Autowired
+    private TicketWebSocketHandler webSocketHandler;
     private TicketConfig config;
 
-    private final int totalCapacity ;
+    private int totalCapacity ;
 
     public List<String> maxTicketArray = Collections.synchronizedList(new ArrayList<>());
-    public List<String> totalTicketArray = Collections.synchronizedList(new ArrayList<>());
+    public List<String> totalTicketArray = Collections.synchronizedList(new ArrayList<>(5));
 
     //Constructor for the TicketPool class
-    public TicketPool(TicketConfig config) {
+    @Autowired
+    public TicketPool(TicketWebSocketHandler webSocketHandler) {
+        this.webSocketHandler = webSocketHandler;
+        this.config = null; // This will be updated later when the config is set.
+        this.totalCapacity = 0; // Will be updated when configuration is applied.
+    }
+
+    public void setConfig(TicketConfig config) {
         this.config = config;
         this.totalCapacity = config.getTotalTickets();
 
-        // fill the maxTicketArray based on the configuration's max capacity(User input).
+        maxTicketArray.clear();
         for (int i = 0; i < config.getMaxTicketCapacity(); i++) {
             maxTicketArray.add("MaxTicket-" + (i + 1));
         }
     }
 
+
+    private void broadcastState() {
+        String message = String.format("{\"maxTicketArraySize\": %d, \"totalTicketArraySize\": %d, \"maxTicketCapacity\": %d}",
+                maxTicketArray.size(),
+                totalTicketArray.size(),
+                config.getMaxTicketCapacity()
+        );
+        webSocketHandler.broadcast(message);
+    }
 
     //method for producer(Vendor)
     public synchronized void addTicket() throws InterruptedException {
@@ -48,7 +64,7 @@ public class TicketPool {
             System.out.println("Current state : \n   Maximum ticket available for produce : " + maxTicketArray.size() +
                         '\n' + "   Total ticket available for sell : " + totalTicketArray.size() );
             System.out.println();
-
+            broadcastState();
 
         }else{
             System.out.println("Maximum ticket capacity reached.No more tickets to be produced");
@@ -57,6 +73,7 @@ public class TicketPool {
         notifyAll(); //notify waiting thread
 
     }
+
 
     //method for consumer(Customer)
     public synchronized void removeTicket() throws InterruptedException {
@@ -73,10 +90,10 @@ public class TicketPool {
                     '\n' + "   Total ticket available for sell : " + totalTicketArray.size());
         System.out.println();
 
+        broadcastState();
 
         notifyAll();
     }
-
 
 
 
