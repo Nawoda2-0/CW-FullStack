@@ -11,19 +11,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class TicketWebSocketHandler extends TextWebSocketHandler {
+public class LogWebSocketHandler extends TextWebSocketHandler {
 
     private final Set<WebSocketSession> sessions = Collections.newSetFromMap(new ConcurrentHashMap<>());
-
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         sessions.add(session);
-    }
-
-    @Override
-    public void handleTextMessage(WebSocketSession session, TextMessage message) {
-        // Handle incoming messages if needed
     }
 
     @Override
@@ -42,5 +36,4 @@ public class TicketWebSocketHandler extends TextWebSocketHandler {
             }
         }
     }
-
 }

@@ -11,13 +11,17 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig implements WebSocketConfigurer {
 
     private final TicketWebSocketHandler ticketWebSocketHandler;
+    private final LogWebSocketHandler logWebSocketHandler;
 
-    public WebSocketConfig(TicketWebSocketHandler ticketWebSocketHandler) {
+
+    public WebSocketConfig(TicketWebSocketHandler ticketWebSocketHandler, LogWebSocketHandler logWebSocketHandler) {
         this.ticketWebSocketHandler = ticketWebSocketHandler;
+        this.logWebSocketHandler = logWebSocketHandler;
     }
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(ticketWebSocketHandler, "/ticket-updates").setAllowedOrigins("*");
+        registry.addHandler(logWebSocketHandler, "/log-updates").setAllowedOrigins("*");
     }
 }

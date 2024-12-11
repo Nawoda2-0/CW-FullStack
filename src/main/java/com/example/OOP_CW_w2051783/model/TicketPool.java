@@ -1,5 +1,6 @@
 package com.example.OOP_CW_w2051783.model;
 
+import com.example.OOP_CW_w2051783.configuration.LogWebSocketHandler;
 import com.example.OOP_CW_w2051783.configuration.TicketWebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +14,10 @@ import java.util.List;
 public class TicketPool {
 
     private TicketWebSocketHandler webSocketHandler;
+
+    @Autowired
+    private LogWebSocketHandler logWebSocketHandler;
+
     private TicketConfig config;
 
     private int totalCapacity ;
@@ -48,26 +53,41 @@ public class TicketPool {
         webSocketHandler.broadcast(message);
     }
 
+    private void broadcastLog(String logMessage, String type) {
+        String logMessageJson = String.format(
+                "{\"type\": \"%s\", \"message\": \"%s\"}",
+                type,
+                logMessage.replace("\"", "\\\"") // Escape quotes
+        );
+        logWebSocketHandler.broadcast(logMessageJson);
+    }
+
     //method for producer(Vendor)
     public synchronized void addTicket() throws InterruptedException {
         String name = Thread.currentThread().getName();
 
         while (totalTicketArray.size()==totalCapacity){
-            System.out.println("Ticket pool is full " + name + "is waiting for ticket to be sold!");
+            String logMessage ="Ticket pool is full " + name + "is waiting for ticket to be sold!";
+            System.out.println(logMessage);
+            broadcastLog(logMessage, "Waiting");
             System.out.println();
             wait();//wait if the pool is full
         }
         if (!maxTicketArray.isEmpty()){
             totalTicketArray.add("Ticket");
             maxTicketArray.remove(0);
-            System.out.println("Vendor " +name+ " added a ticket");
+            String logMessage = "Vendor " +name+ " added a ticket";
+            System.out.println(logMessage);
+            broadcastLog(logMessage, "Vendor");
             System.out.println("Current state : \n   Maximum ticket available for produce : " + maxTicketArray.size() +
                         '\n' + "   Total ticket available for sell : " + totalTicketArray.size() );
             System.out.println();
             broadcastState();
 
         }else{
-            System.out.println("Maximum ticket capacity reached.No more tickets to be produced");
+            String logMessage = "Maximum ticket capacity reached.No more tickets to be produced";
+            System.out.println(logMessage);
+            broadcastLog(logMessage, "Waiting");
             System.out.println();
         }
         notifyAll(); //notify waiting thread
@@ -79,13 +99,17 @@ public class TicketPool {
     public synchronized void removeTicket() throws InterruptedException {
         String name = Thread.currentThread().getName();
         while (totalTicketArray.isEmpty()){
-            System.out.println("Ticket pool is empty. Customer " + name + " is waiting for ticket to be added");
+            String logMessage = "Ticket pool is empty. Customer " + name + " is waiting for ticket to be added";
+            System.out.println(logMessage);
+            broadcastLog(logMessage, "Waiting");
             System.out.println();
             wait(); //wait if the ticket pool is empty
         }
 
         totalTicketArray.remove(0);
-        System.out.println("Customer " + name + " bought a ticket");
+        String logMessage = "Customer " + name + " bought a ticket";
+        System.out.println(logMessage);
+        broadcastLog(logMessage, "Customer");
         System.out.println("Current state : \n   Maximum ticket available for produce : " + maxTicketArray.size() +
                     '\n' + "   Total ticket available for sell : " + totalTicketArray.size());
         System.out.println();
