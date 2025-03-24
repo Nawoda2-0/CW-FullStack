@@ -1,21 +1,21 @@
-# Real-Time Event Ticketing System
+# 🚀Real-Time Event Ticketing System
 
-## Overview
+## ➡️Overview
 The Real-Time Event Ticketing System is a robust application designed to simulate producer concumer pattern.This is a full-stack real-time ticketing app where multiple vendors
 and customers access a shared ticket pool. Used a simulated
 producer-consumer pattern for efficient distribution and ensured
 thread safety with synchronized data structures like Synchronized
 ArrayList.
 
-**use master branch to find project codes**
+**🔴use master branch to find project codes**
 
-## Features
+## 🎯Features
 
 
-- **Real-Time Ticketing:** Purchase and reserve tickets with real-time updates.
-- **Multiple producer concumer:** Multiple producer and consumer sell and buy tickets simultaneously.
-- **Dinamic GUI:** Realtime updating GUI using webshockets.
-- **Error Handling:** Comprehensive logging and error management.
+- **🎫Real-Time Ticketing:** Purchase and reserve tickets with real-time updates.
+- **🕺Multiple producer concumer:** Multiple producer and consumer sell and buy tickets simultaneously.
+- **😍Dinamic GUI:** Realtime updating GUI using webshockets.
+- **⁉️Error Handling:** Comprehensive logging and error management.
 
 ## Tech Stack
 ### Backend
