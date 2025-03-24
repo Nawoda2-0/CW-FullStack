@@ -17,7 +17,7 @@ ArrayList.
 - **😍Dinamic GUI:** Realtime updating GUI using webshockets.
 - **⁉️Error Handling:** Comprehensive logging and error management.
 
-## Tech Stack
+## ⚙️Tech Stack
 ### Backend
 - **Language:** Java
 - **Framework:** Spring Boot
@@ -32,7 +32,7 @@ ArrayList.
 - **Version Control:** Git & GitHub
 - **IDE:** IntelliJ IDEA
 
-## Installation
+## 🔋Installation
 
 ### Prerequisites
 - Java 17+
@@ -89,11 +89,11 @@ ArrayList.
 - Deployment to cloud platforms.
 - Real-time notifications using WebSockets.
 
-## License
+##📃 License
 Copyright  `@Nawoda` 
 
 
-## Contact
+##📱 Contact
 For any inquiries, please reach out to:
 - **Email:** nawodasilva2001@gmail.com
 - **GitHub:** [Your GitHub Profile](https://github.com/nawoda2-0)
