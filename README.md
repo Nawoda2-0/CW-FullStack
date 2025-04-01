@@ -8,6 +8,7 @@ thread safety with synchronized data structures like Synchronized
 ArrayList.
 
 **🔴use master branch to find project codes**
+**🔴Link to front-end : https://github.com/Nawoda2-0/OOP-CW-Front-end.git**
 
 ## 🎯Features
 
