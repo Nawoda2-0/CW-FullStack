@@ -1,5 +1,10 @@
 # 🚀Real-Time Event Ticketing System
 
+![image alt](https://github.com/Nawoda2-0/OOP-CW-Front-end/blob/main/Screenshot%202024-12-12%20142047.png?raw=true)
+![image alt](https://github.com/Nawoda2-0/OOP-CW-Front-end/blob/212b113d4cabe7735a67bf98af1ebd77e2bda88d/Screenshot%202024-12-12%20142013.png)
+![image alt](https://github.com/Nawoda2-0/OOP-CW-Front-end/blob/212b113d4cabe7735a67bf98af1ebd77e2bda88d/Screenshot%202024-12-12%20141944.png)
+![image alt](https://github.com/Nawoda2-0/OOP-CW-Front-end/blob/212b113d4cabe7735a67bf98af1ebd77e2bda88d/Screenshot%202024-12-12%20141958.png)
+
 ## ➡️Overview
 The Real-Time Event Ticketing System is a robust application designed to simulate producer concumer pattern.This is a full-stack real-time ticketing app where multiple vendors
 and customers access a shared ticket pool. Used a simulated
